@@ -36,7 +36,7 @@ def magicRatingCalculator(mL, input):
 			if b[i] != cD:
 				rat.remove(b)
 			if len(rat) == 1:
-			 	break
+				break
 		ratings = [i for i in rat]
 		if len(ratings) == 1:
 			break
