@@ -1,4 +1,4 @@
-lowPoints = []
+lowpoints = []
 def main():
 	with open('input09.txt', 'r') as puzzleInput:
 		input = puzzleInput.readlines()
@@ -13,11 +13,11 @@ def main():
 						if y == len(field) - 1 or v < field[y + 1][x]:
 							if x == len(r) - 1 or v < field[y][x + 1]:
 								lowPointRiskLevelSum += 1 + v
-								lowPoints.append([y, x])
+								lowpoints.append([y, x])
 		print(f"Part 1: {lowPointRiskLevelSum}")
 
 		b = []
-		for p in lowPoints:
+		for p in lowpoints:
 			b.append(basinSize(field, p[0], p[1]))
 		b.sort()
 		print(f"Part 2: {b.pop() * b.pop() * b.pop()}")
