@@ -1,29 +1,22 @@
 def main():
-	with open('test.txt', 'r') as puzzleInput:
+	with open('input15.txt', 'r') as puzzleInput:
 		grid = [[int(j) for j in i.strip()] for i in puzzleInput.readlines()]
 	print(f"Part 1: {aStar(grid)}") # Runs in about 10 seconds
 	expand(grid)
 	print(f"Part 2: {aStar(grid)}") # Runs in about 15 minutes :'(
 
 tx, ty = 0, 0
-class queItem:
-	def __init__(self, x, y, cost, path):
-		self.x = x
-		self.y = y
-		self.cost = cost # From entrance
-		self.hCost = h(x, y) # Lowest estimated cost from here to target (result of heuristic function)
-		self.path = path
 def aStar(grid):
 	global tx, ty
 	tx, ty = len(grid[0]) - 1, len(grid) - 1
-	que = [queItem(0, 0, 0, [])]
+	que = [[0, 0, 0, h(0, 0)]]
 	bestVisits = {}
 	while True:
 		q = que[0]
-		x, y, cost, path = q.x, q.y, q.cost, q.path
+		x, y, cost = q[0], q[1], q[2]
 		if x == tx and y == ty:
 			return cost
-		k = key(x, y)
+		k = str(x) + ',' + str(y)
 		if k in bestVisits and bestVisits[k] <= cost:
 			que.remove(q)
 			continue
@@ -31,15 +24,11 @@ def aStar(grid):
 		for dx, dy in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
 			nx, ny = x + dx, y + dy
 			if 0 <= nx <= tx and 0 <= ny <= ty:
-				nPath = path.copy()
-				nPath.append(key(nx, ny))
-				que.append(queItem(nx, ny, cost + grid[nx][ny], nPath))
+				que.append([nx, ny, cost + grid[nx][ny], h(nx, ny)])
 		que.remove(q)
-		que.sort(key=lambda i: i.cost + i.hCost)
+		que.sort(key=lambda i: i[2] + i[3])
 def h(x, y):
 	return abs(tx - x) + abs(ty - y)
-def key(x, y):
-	return str(x) + ',' + str(y)
 
 def expand(grid):
 	L = len(grid)
