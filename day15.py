@@ -1,5 +1,5 @@
 def main():
-	with open('input15.txt', 'r') as puzzleInput:
+	with open('test.txt', 'r') as puzzleInput:
 		grid = [[int(j) for j in i.strip()] for i in puzzleInput.readlines()]
 	print(f"Part 1: {aStar(grid)}") # Runs in about 10 seconds
 	expand(grid)
