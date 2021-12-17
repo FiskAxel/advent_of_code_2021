@@ -1,6 +1,6 @@
 dots = []
 def main():
-	with open('test.txt', 'r') as puzzleInput:
+	with open('input13.txt', 'r') as puzzleInput:
 		input = puzzleInput.readlines()
 		for i, c in enumerate(input):
 			if c == '\n':
