@@ -1,4 +1,4 @@
-import math
+from math import sqrt
 def main():
 	with open('input20.txt', 'r') as puzzleInput:
 		IEA = puzzleInput.readline()
@@ -14,10 +14,10 @@ def main():
 		for _ in range(24):
 			img = enhance(img, IEA, False)
 			img = enhance(img, IEA, True)
-		print(f"Part 2: {onCount(img)}")
+		print(f"Part 2: {onCount(img)}") # Runs in about 10 seconds
 
 def enhance(img, iea, infLit):
-	l = int(math.sqrt(len(img))) + 1
+	l = int(sqrt(len(img))) + 1
 	newImg = {}
 	for y in range(-1, l):
 		for x in range(-1, l):
@@ -43,7 +43,7 @@ def onCount(img):
 
 def printImg(img):
 	print()
-	l = int(math.sqrt(len(img)))
+	l = int(sqrt(len(img)))
 	for y in range(l):
 		for x in range(l):
 			print(img[x, y], end="")
